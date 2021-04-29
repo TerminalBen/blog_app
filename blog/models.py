@@ -8,6 +8,16 @@ from django.db.models.expressions import OrderBy
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+class PublishedManager(models.Manager):
+    """custom model manager Class with a method to retrieve published posts
+
+    Args:
+        models ([model]): [django model]
+    """
+    def get_queryset(self):
+        return super(PublishedManager,self).get_queryset().filter(status = 'published')
+
+
 class Post(models.Model):
     """[summary]
 
@@ -40,4 +50,7 @@ class Post(models.Model):
             str: [description]
         """
         return self.title
+
+    objects = models.Manager() #default manager
+    published = PublishedManager() #custom manager
 
