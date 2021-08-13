@@ -9,16 +9,16 @@ Usage of template tags and template filter functionalities, webcrawler-friendly 
 Sitting on top of postgresql, the app takes full advantage of full-text search, stemming and ranking of the results allowed by postgres.
 
 ### Dependencies
-*python3
-*asgiref==3.3.4
-*Django==3.2
-*django-ckeditor==6.1.0
-*django-js-asset==1.2.2
-*django-taggit==1.5.1
-*psycopg2-binary==2.8.4
-*pytz==2021.1
-*sqlparse==0.4.1
-*postgresql
+* python3
+* asgiref==3.3.4
+* Django==3.2
+* django-ckeditor==6.1.0
+* django-js-asset==1.2.2
+* django-taggit==1.5.1
+* psycopg2-binary==2.8.4
+* pytz==2021.1
+* sqlparse==0.4.1
+* postgresql
 
 ## Authors
 
