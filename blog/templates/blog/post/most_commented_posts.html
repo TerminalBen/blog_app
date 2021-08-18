@@ -1,7 +1,16 @@
-<ul>
-    {%for post in most_commented_posts%}
-    <li>
-        <a href="{{post.get_absolute_url}}">{{post.title}}</a>
-    </li>
-    {%endfor%}
-</ul>
+<div class="card mb-4">
+    <div class="card-header">Most Commented Posts</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-8">
+                <ul class="list-unstyled mb-0">
+                    {%for post in most_commented_posts%}
+                    <li>
+                        <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
