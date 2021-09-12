@@ -3,49 +3,117 @@
 {%block title%}My Blog - {{post.title}}{%endblock%}
 
 {%block content%}
-    <h1>{{post.title}}</h1>
-    <p class='date'>Published on {{post.publish}} by {{post.author}}. Category:{{post.category}} Tags:{%for tag in tag%}{{tag}} {%endfor%}</p>
-        <p>{{post.body | linebreaks}}</p>
-    <p>
-        <a href="{% url 'blog:post_share' post.id %}">
-            Share
-        </a>
-    </p>
+    <article>
+        <header class="mb-4">
+            <h1 class = "fw-bolder mb-1">{{post.title}}</h1>
+            <div class='text-muted fst-italic mb-2'>Published on {{post.publish}} by {{post.author}}.</div>
+            <!-- <a>Category:</a><a class = "badge bg-secondary text-decoration-none link-light" href = "#">{{post.category}} </a> -->
+            <!-- <a>Tags:</a><a class = "badge bg-secondary text-decoration-none link-light" href = "#">{%for tag in tag%}{{tag }}{%endfor%}</a> -->
+            <p class="small text-muted">Category:
+                <a class="badge bg-secondary text-decoration-none link-light" href="#">{{post.category}} </a>
+            </p>
 
-    <h2>Similar Posts</h2>
+            <p class="small text-muted">Tags:  
+                {%for tag in post.tags.all%}
+                    <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'blog:post_list_by_tag' tag.slug%}" >{{tag.name }}</a>
+                {% if not forloop.last%} {%endif%}
+                {%endfor%}
+            </p>
+        </header>
+        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+        <section class = "mb-5">
+            <p class="fs-6 mb-4">
+                <p>{{post.body | safe | linebreaks }}</p>
+            </p>
+           
+            <p class="small text-secondary text-center" >
+                Share: 
+                <a href="{% url 'blog:post_share' post.id %}" target="_blank"><em class="fa fa-envelope"></em></a>
+                
+            </p>
+        </section>
+        
+    </article>
+
+    <h3>Similar Posts</h3>
     {%for post in similar_posts%}
     <p>
         <a href="{{post.get_absolute_url}}">{{post.title}}</a>
     </p>
     {%empty%}
-        No similar posts yet
+        <p class="small text-muted">No similar posts yet</p>
     {%endfor%}
 
-    {%with comments.count as total_comments%}
+    <!-- {%with comments.count as total_comments%}
     <h2>
         {{total_comments}} comment{{total_comments|pluralize}}
     </h2>
-    {%endwith%}
+    {%endwith%} -->
 
-    {%for comment in comments%}
-    <div>
-        <p class = "comment">
-            Comment{{forloop.counter}} by {{comment.name}}
-            {{comment.created}}
-        </p>
-        {{comment.body|linebreaks}}
-    </div>
-    {%empty%}
-    <p>There are no comments yet</p>
-    {%endfor%}
-    {%if new_comment%}
-        <h2>Your comment has been submitted</h2>
-    {%else%}
-        <h2>Add a new comment</h2>
-        <form method="post">
-            {{comment_form.as_p}}
-            {% csrf_token %}
-            <p><input type="submit" value = "Add Comment"></p>
-        </form>
-    {%endif%}
+    <h3>Comment Section</h3>
+
+    <section class="mb-5">
+        <div class= "card bg-light">
+            <div class = "card-body"></div>
+            <!-- <p class="text-secondary">
+                {%with comments.count as total_comments%}
+                
+                    {{total_comments}} comment{{total_comments|pluralize}}
+                
+                {%endwith%}
+            </p> -->
+            {%if new_comment%}
+            <h2>Your comment has been submitted</h2>
+            {%else%}
+            <!-- <h2>Add a new comment</h2> -->
+            <div class="container">
+                <form class="mb-4" method="post">
+                    {{comment_form.as_p}}
+                    {% csrf_token %}
+                    <div class="container">
+                        <p>
+                            <input class="btn btn-primary" type="submit" value="Add Comment">
+                        </p>
+                    </div>
+                </form>
+            </div>
+            {%endif%}
+            <p class="text-secondary">
+                {%with comments.count as total_comments%}
+            
+                {{total_comments}} comment{{total_comments|pluralize}}
+            
+                {%endwith%}
+            </p>
+        {%for comment in comments%}
+                <div class = "d-flex">
+                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                    <div class="ms-3">
+                        <div class = "small text-secondary">
+                            <p>Comment by {{comment.name}} at {{comment.created}}</p>
+                        </div>
+                        {{comment.body|linebreaks}}
+                    </div>
+                </div>
+                {%empty%}
+                <div class="mb-3">
+                    <p class="text-muted">There are no comments yet.</p>
+                </div>
+        </div>
+        {%endfor%}
+    </section>
+
+        <!-- {%for comment in comments%}
+        <div>
+            <p class = "comment">
+                Comment{{forloop.counter}} by {{comment.name}}
+                {{comment.created}}
+            </p>
+            {{comment.body|linebreaks}}
+        </div>
+        {%empty%}
+        <p>There are no comments yet</p>
+        {%endfor%} -->
+
+    
 {%endblock%}
