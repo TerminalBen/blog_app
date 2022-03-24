@@ -4,9 +4,22 @@ A fully functional blog app backend
 
 ## Description
 
-Fully functional blog app backend with email sharing functionality, comment system, tagging functionality, and similarity matching.
-Usage of template tags and template filter functionalities, webcrawler-friendly with sitemap implemented and rss feed supported.
-Sitting on top of postgresql, the app takes full advantage of full-text search, stemming and ranking of the results allowed by postgres.
+### Fully functional blog app backend with modern functionalities such as: 
+   - Admin Panel
+   - Built in TextEditor
+   - Multiple Editors Functionality
+   - email sharing 
+   - Comment system
+   - Tagging functionality
+   - Similarity matching
+   - Usage of template tags and template filter functionalities
+   - webcrawler-friendly with sitemap implemented
+   - rss feed supported.
+   - Postgresql
+   - Full-text search
+   - Stemming and ranking (postgres).
+
+TechStack : ```Python```,```Django```,```PstgreSql```
 
 ### Dependencies
 * python3
