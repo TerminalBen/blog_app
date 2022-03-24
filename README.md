@@ -19,7 +19,7 @@ A fully functional blog app backend
    - Full-text search
    - Stemming and ranking (postgres).
 
-TechStack : ```Python```,```Django```,```PstgreSql```
+TechStack : ```Python```,```Django```,```PostgreSql```
 
 ### Dependencies
 * python3
